@@ -12,6 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,6 +23,7 @@ import javax.validation.constraints.Size;
  *
  * @author stefanini
  */
+
 @Entity
 @Table(name = "aluno")
 public class Aluno implements Serializable{
@@ -46,7 +50,15 @@ public class Aluno implements Serializable{
     @NotNull
     @Column(name = "cpf")
     private String cpf;
+    
+    @JoinColumn(name = "turma", referencedColumnName = "id_turma")
+    @ManyToOne
+    private Turma turma;
 
+    public Aluno(){
+        
+    }
+    
     public Aluno(Long id, String nome, String matricula, String endereco, String cpf) {
         this.id = id;
         this.nome = nome;
@@ -54,11 +66,7 @@ public class Aluno implements Serializable{
         this.endereco = endereco;
         this.cpf = cpf;
     }
-    public Aluno(){
-        
-    }
     
-
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -102,6 +110,5 @@ public class Aluno implements Serializable{
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    
-    
+   
 }

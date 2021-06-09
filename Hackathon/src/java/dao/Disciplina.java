@@ -13,6 +13,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -30,7 +33,7 @@ public class Disciplina implements Serializable{
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id")
+    @Column(name = "id_disciplina")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
@@ -49,17 +52,21 @@ public class Disciplina implements Serializable{
     @NotNull
     @Column(name = "totalHora")
     private int totalHora;
+    
+    @JoinColumn(name = "curso", referencedColumnName = "id_curso")
+    @ManyToOne
+    private Curso curso;
 
+    public Disciplina(){
+        
+    }
+    
     public Disciplina(Long id, String nome, String coneudoProgramatico, String numeroCredito, int totalHora) {
         this.id = id;
         this.nome = nome;
         this.coneudoProgramatico = coneudoProgramatico;
         this.numeroCredito = numeroCredito;
         this.totalHora = totalHora;
-    }
-    
-    public Disciplina(){
-        
     }
 
     public Long getId() {
@@ -101,6 +108,5 @@ public class Disciplina implements Serializable{
     public void setTotalHora(int totalHora) {
         this.totalHora = totalHora;
     }
-    
     
 }

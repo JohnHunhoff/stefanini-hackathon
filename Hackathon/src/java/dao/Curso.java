@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -25,7 +26,7 @@ import javax.validation.constraints.NotNull;
  */
 
 @Entity
-@Table(name = "cursos")
+@Table(name = "curso")
 public class Curso implements Serializable{
     
     private static final long serialVersionUID = 1L;
@@ -33,33 +34,30 @@ public class Curso implements Serializable{
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id")
+    @Column(name = "id_curso")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @Column(name = "hora")
     private int hora;
     
+    @JoinColumn(name = "universidade", referencedColumnName = "id_universidade")
+    @ManyToOne
+    private University universidade;
+    
     @NotNull
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "curso")
     private List<Disciplina> disciplinas;
-    
-    @NotNull
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id")
-    private List<Turma> turmaList;
-
-    public Curso(Long id, int hora, List<Disciplina> disciplinas, List<Turma> turmaList) {
-        this.id = id;
-        this.hora = hora;
-        this.disciplinas = disciplinas;
-        this.turmaList = turmaList;
-    }
-    
     
     public Curso(){
         
+    }
+    
+    public Curso(Long id, int hora, List<Disciplina> disciplinas) {
+        this.id = id;
+        this.hora = hora;
+        this.disciplinas = disciplinas;
+  
     }
 
     public Long getId() {
@@ -85,16 +83,5 @@ public class Curso implements Serializable{
     public void setDisciplinas(List<Disciplina> disciplinas) {
         this.disciplinas = disciplinas;
     }
-
-    public List<Turma> getTurmaList() {
-        return turmaList;
-    }
-
-    public void setTurmaList(List<Turma> turmaList) {
-        this.turmaList = turmaList;
-    }
-    
-    
-    
     
 }

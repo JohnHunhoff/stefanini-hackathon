@@ -6,6 +6,7 @@
 package dao;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -43,7 +45,7 @@ public class University implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id")
+    @Column(name = "id_universidade")
     private Long id;
     @Basic(optional = false)
     @NotNull
@@ -56,11 +58,11 @@ public class University implements Serializable {
     @Column(name = "address")
     private String address;
     
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "cursoId")
-    private Curso curso;
-    
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Curso> cursos;
 
     public University() {
+        
     }
 
     public University(Long id) {

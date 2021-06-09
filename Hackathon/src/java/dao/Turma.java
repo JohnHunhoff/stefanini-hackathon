@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -31,28 +32,26 @@ public class Turma implements Serializable{
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id")
+    @Column(name = "id_turma")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
      
     @NotNull
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id")
     private List<Aluno> alunos;
     
     @NotNull
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id")
-    private List<Disciplina> disciplinas;
-    
-    public Turma(Long id, List<Aluno> alunos, List<Disciplina> diciplinas) {
-        this.id = id;
-        this.alunos = alunos;
-        this.disciplinas = diciplinas;
-    }
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "id_disciplina")
+    private Disciplina disciplina;
     
     public Turma(){
         
+    }
+    
+    public Turma(Long id, List<Aluno> alunos, Disciplina disciplina) {
+        this.id = id;
+        this.alunos = alunos;
+        this.disciplina = disciplina;
     }
 
     public Long getId() {
@@ -71,15 +70,13 @@ public class Turma implements Serializable{
         this.alunos = alunos;
     }
 
-    public List<Disciplina> getDisciplinas() {
-        return disciplinas;
+    public Disciplina getDisciplina() {
+        return disciplina;
     }
 
-    public void setDisciplinas(List<Disciplina> disciplinas) {
-        this.disciplinas = disciplinas;
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
     }
 
-    
-    
     
 }
