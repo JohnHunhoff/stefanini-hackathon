@@ -8,24 +8,21 @@
 
     <ui:composition>
 
-        <p:dialog id="UniversityCreateDlg" widgetVar="UniversityCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Incluir Universidade">
-            <h:form id="UniversityCreateForm">
+        <p:dialog id="CursoCreateDlg" widgetVar="CursoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Incluir Universidade">
+            <h:form id="CursoCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{universityController.selected != null}">
+                    <p:panelGrid columns="2" rendered="#{cursoController.selected != null}">
                         <p:outputLabel value="Código" for="id" />
-                        <p:inputText id="id" value="#{universityController.selected.id}" title="Código}" required="true" requiredMessage="Código Obrigatório"/>
+                        <p:inputText id="id" value="#{cursoController.selected.id}" title="Código}" required="true" requiredMessage="Código Obrigatório"/>
                        
-                        <p:outputLabel value="Nome" for="name" />
-                        <p:inputText id="name" value="#{universityController.selected.name}" title="Nome" required="true" requiredMessage="Nome Obrigatório"/>
+                        <p:outputLabel value="Disciplina" for="disciplina" />
+                        <p:inputText id="description" value="#{cursoController.selected.disciplinas}" title="disciplinas" required="true" requiredMessage="Descrição Obrigatório"/>
                         
-                        <p:outputLabel value="Descrição" for="description" />
-                        <p:inputText id="description" value="#{universityController.selected.description}" title="Descrição" required="true" requiredMessage="Descrição Obrigatório"/>
-                        
-                        <p:outputLabel value="Endereço" for="address" />
-                        <p:inputText id="address" value="#{universityController.selected.address}" title="Endereço" required="true" requiredMessage="Endereço Obrigatório"/>
+                        <p:outputLabel value="Hora" for="hora" />
+                        <p:inputText id="address" value="#{cursoController.selected.hora}" title="horas" required="true" requiredMessage="Endereço Obrigatório"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{universityController.create}" value="Salvar" update="display,:UniversityListForm:datalist,:growl" oncomplete="handleSubmit(args,'UniversityCreateDialog');"/>
-                    <p:commandButton value="Cancelar" onclick="UniversityCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{cursoController.create}" value="Salvar" update="display,:CursoListForm:datalist,:growl" oncomplete="handleSubmit(args,'CursoCreateDialog');"/>
+                    <p:commandButton value="Cancelar" onclick="CursoCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

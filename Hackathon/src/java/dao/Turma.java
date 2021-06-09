@@ -40,9 +40,10 @@ public class Turma implements Serializable{
     @OneToMany(cascade = CascadeType.ALL)
     private List<Aluno> alunos;
     
+    /*
     @NotNull
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "id_disciplina")
-    private Disciplina disciplina;
+    private Disciplina disciplina;*/
     
     public Turma(){
         
@@ -51,7 +52,7 @@ public class Turma implements Serializable{
     public Turma(Long id, List<Aluno> alunos, Disciplina disciplina) {
         this.id = id;
         this.alunos = alunos;
-        this.disciplina = disciplina;
+        //this.disciplina = disciplina;
     }
 
     public Long getId() {
@@ -69,14 +70,14 @@ public class Turma implements Serializable{
     public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
     }
-
+/*
     public Disciplina getDisciplina() {
         return disciplina;
     }
 
     public void setDisciplina(Disciplina disciplina) {
         this.disciplina = disciplina;
-    }
+    }*/
 
     
 }
